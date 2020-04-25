@@ -66,7 +66,7 @@ public interface ResolvedReferenceTypeDeclaration extends ResolvedTypeDeclaratio
      * @throws UnsolvedSymbolException if some ancestor could not be resolved.
      */
     default List<ResolvedReferenceType> getAncestors() {
-        return getAncestors(false);
+        return getAncestors(true);
     }
 
     /**
