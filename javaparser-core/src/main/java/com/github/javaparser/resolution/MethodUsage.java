@@ -48,7 +48,11 @@ public class MethodUsage implements ResolvedTypeParametrized {
         this.typeParametersMap = ResolvedTypeParametersMap.empty();
         this.declaration = declaration;
         for (int i = 0; i < declaration.getNumberOfParams(); i++) {
-            paramTypes.add(declaration.getParam(i).getType());
+            try {
+                paramTypes.add(declaration.getParam(i).getType());
+            } catch (UnsolvedSymbolException e) {
+                continue;
+            }
         }
         for (int i = 0; i < declaration.getNumberOfSpecifiedExceptions(); i++) {
             exceptionTypes.add(declaration.getSpecifiedException(i));
