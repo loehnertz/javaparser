@@ -21,6 +21,7 @@
 
 package com.github.javaparser.resolution.declarations;
 
+import com.github.javaparser.resolution.UnsolvedSymbolException;
 import com.github.javaparser.resolution.types.ResolvedType;
 
 import java.util.Collections;
@@ -68,7 +69,11 @@ public interface ResolvedMethodLikeDeclaration extends ResolvedDeclaration,
             if (i != 0) {
                 sb.append(", ");
             }
-            sb.append(getParam(i).describeType());
+            try {
+                sb.append(getParam(i).describeType());
+            } catch (UnsolvedSymbolException e) {
+                sb.append("UNKNOWN");
+            }
         }
         sb.append(")");
         return sb.toString();
