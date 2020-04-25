@@ -57,7 +57,11 @@ public class MethodUsage implements ResolvedTypeParametrized {
         for (int i = 0; i < declaration.getNumberOfSpecifiedExceptions(); i++) {
             exceptionTypes.add(declaration.getSpecifiedException(i));
         }
-        returnType = declaration.getReturnType();
+        try {
+            returnType = declaration.getReturnType();
+        } catch (UnsolvedSymbolException e) {
+            returnType = null;
+        }
     }
 
     public MethodUsage(ResolvedMethodDeclaration declaration,
