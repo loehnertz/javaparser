@@ -95,6 +95,7 @@ public class JavaParserTypeSolver implements TypeSolver {
         if (cacheSizeLimit != CACHE_SIZE_UNSET) {
             cacheBuilder.maximumSize(cacheSizeLimit);
         }
+        cacheBuilder.concurrencyLevel(Runtime.getRuntime().availableProcessors());
         return cacheBuilder.build();
     }
 
