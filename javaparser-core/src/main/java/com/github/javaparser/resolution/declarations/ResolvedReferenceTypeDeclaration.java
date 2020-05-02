@@ -96,10 +96,14 @@ public interface ResolvedReferenceTypeDeclaration extends ResolvedTypeDeclaratio
         if (!(Object.class.getCanonicalName().equals(getQualifiedName()))) {
             for (ResolvedReferenceType ancestor : getAncestors()) {
                 ancestors.add(ancestor);
-                for (ResolvedReferenceType inheritedAncestor : ancestor.getAllAncestors()) {
-                    if (!ancestors.contains(inheritedAncestor)) {
-                        ancestors.add(inheritedAncestor);
+                try {
+                    for (ResolvedReferenceType inheritedAncestor : ancestor.getAllAncestors()) {
+                        if (!ancestors.contains(inheritedAncestor)) {
+                            ancestors.add(inheritedAncestor);
+                        }
                     }
+                } catch (UnsolvedSymbolException e) {
+                    continue;
                 }
             }
         }
