@@ -45,7 +45,11 @@ public class TokenTypes {
     }
 
     public static boolean isComment(int kind) {
-        return getCategory(kind).isComment();
+        try {
+            return getCategory(kind).isComment();
+        } catch (AssertionError e) {
+            return false;
+        }
     }
 
     /**
